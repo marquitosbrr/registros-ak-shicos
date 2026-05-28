@@ -4,36 +4,336 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Linaje - Registro Akashico</title>
-    <!-- Tres niveles hacia atrás para llegar a la raíz desde series/descendencia/ -->
-    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../../css/styles.css">
+    
+    <!-- MAGIA CSS: EFECTOS GLOBALES EN LA PÁGINA SEGÚN EL HIJO -->
+    <style>
+        /* Transición base para que la página no cambie de golpe */
+        body {
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        /* Capa global para overlays (miasmas, ilusiones, etc.) */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* 1. AION (Manipulación Temporal) */
+        body:has(.card-aion:hover) {
+            filter: grayscale(100%) contrast(120%);
+        }
+        body:has(.card-aion:hover)::before {
+            content: "⏳ REBOBINANDO LÍNEA TEMPORAL ⏳";
+            font-family: monospace;
+            font-size: 2rem;
+            color: white;
+            top: 20px; bottom: auto;
+            opacity: 0.8;
+            letter-spacing: 5px;
+        }
+        body:has(.card-aion:hover) .grid-container {
+            animation: time-reverse 0.1s infinite alternate;
+        }
+        @keyframes time-reverse { 0% { transform: translateX(-2px); } 100% { transform: translateX(2px); } }
+
+        /* 2. ALE (El Vacío y Sombras) */
+        body:has(.card-ale:hover) {
+            background-color: #000;
+        }
+        body:has(.card-ale:hover) main > *:not(.grid-container) {
+            opacity: 0.1;
+        }
+        body:has(.card-ale:hover)::before {
+            background: radial-gradient(circle at 50% 50%, transparent 10%, rgba(0,0,0,0.95) 80%);
+            opacity: 1;
+        }
+
+        /* 3. ASTHERION (Los 4 Elementos) */
+        body:has(.card-astherion:hover)::before {
+            content: "🔥 💧 🌪️ 🪨";
+            font-size: 15rem;
+            opacity: 0.15;
+            animation: spin-elements 10s linear infinite;
+        }
+        @keyframes spin-elements { 100% { transform: rotate(360deg); } }
+
+        /* 4. AURIEL (Luz Divina) */
+        body:has(.card-auriel:hover) {
+            background-color: #ffffff;
+            color: #000 !important;
+            filter: brightness(1.2) contrast(1.1);
+        }
+        body:has(.card-auriel:hover) * {
+            box-shadow: none !important; /* Disuelve las sombras */
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8) !important;
+            border-color: gold !important;
+            color: #111;
+        }
+
+        /* 5. CAEL Y ZAEL (Destrucción y Reconstrucción) */
+        @keyframes destroy-rebuild { 
+            0% { filter: blur(0) grayscale(0); opacity: 1; transform: scale(1); } 
+            40% { filter: blur(10px) grayscale(100%); opacity: 0.3; transform: scale(0.95) skewX(5deg); } /* Desmantela en cenizas */
+            60% { filter: blur(10px) sepia(1) hue-rotate(-50deg) saturate(5); opacity: 0.5; transform: scale(1.05); } /* Forja al rojo vivo */
+            100% { filter: blur(0) grayscale(0); opacity: 1; transform: scale(1); } 
+        }
+        body:has(.card-cael-zael:hover) main {
+            animation: destroy-rebuild 2s infinite;
+        }
+
+        /* 6. DAMIAN (Ilusión y Francia Campeón) */
+        body:has(.card-damian:hover) {
+            background: linear-gradient(90deg, #002395 33%, #ffffff 33%, #ffffff 66%, #ed2939 66%);
+            animation: warp-perspective 3s infinite alternate;
+        }
+        body:has(.card-damian:hover)::before {
+            content: "🏆 🇫🇷 ¡FRANCIA CAMPEÓN DEL MUNDO! 🇫🇷 🏆\A (TODO ES UNA ILUSIÓN)";
+            white-space: pre;
+            font-size: 4rem;
+            font-weight: bold;
+            color: black;
+            text-shadow: 2px 2px 10px white;
+            opacity: 0.9;
+            z-index: 9999;
+        }
+        @keyframes warp-perspective { 0% { transform: perspective(500px) rotateX(5deg); } 100% { transform: perspective(500px) rotateX(-5deg); } }
+
+        /* 7. JACK (Terror Absoluto) */
+        body:has(.card-jack:hover) {
+            background-color: #0a0000;
+            filter: contrast(150%) saturate(150%);
+        }
+        body:has(.card-jack:hover) * {
+            color: #8b0000 !important;
+            font-family: 'Courier New', Courier, monospace !important;
+        }
+        body:has(.card-jack:hover)::before {
+            content: "👁️ TE ESTOY MIRANDO 🪆 SCP-000 👁️";
+            font-size: 6rem;
+            color: red;
+            opacity: 0.15;
+            animation: jumpscare 0.4s infinite;
+        }
+        @keyframes jumpscare { 0%, 90% { opacity: 0; transform: scale(1); } 95% { opacity: 0.8; transform: scale(1.5); } 100% { opacity: 0; } }
+
+        /* 8. KAIRON (Poderes del Tiempo) */
+        body:has(.card-kairon:hover) {
+            filter: sepia(0.8) hue-rotate(-10deg);
+        }
+        body:has(.card-kairon:hover)::after {
+            content: "";
+            background: repeating-radial-gradient(circle, transparent, transparent 20px, rgba(218, 165, 32, 0.1) 21px, rgba(218, 165, 32, 0.1) 22px);
+            opacity: 1;
+            animation: clock-spin 10s linear infinite;
+        }
+        @keyframes clock-spin { 100% { transform: rotate(360deg); } }
+
+        /* 9. LUKA (Oscuridad Invasiva) */
+        body:has(.card-luka:hover) {
+            background-color: black;
+        }
+        body:has(.card-luka:hover) main, body:has(.card-luka:hover) header {
+            opacity: 0.02; /* Apaga casi toda la página */
+        }
+        body:has(.card-luka:hover) .card-luka {
+            opacity: 1 !important;
+            box-shadow: 0 0 50px rgba(255,255,255,0.8);
+            z-index: 1000;
+            position: relative;
+        }
+
+        /* 10. RADEN (Radiación) */
+        body:has(.card-raden:hover) {
+            filter: sepia(1) hue-rotate(70deg) saturate(4) brightness(0.9);
+        }
+        body:has(.card-raden:hover)::after {
+            box-shadow: inset 0 0 150px #00ff00;
+            opacity: 0.6;
+            animation: geiger-pulse 0.2s infinite;
+        }
+        @keyframes geiger-pulse { 0% { opacity: 0.5; } 100% { opacity: 0.7; } }
+
+        /* 11. SAMUEL (Enredaderas) */
+        body:has(.card-samuel:hover) {
+            background-color: #051a05;
+        }
+        body:has(.card-samuel:hover)::before {
+            content: "🌿 🥀 🌱 🌿 🥀 🌱";
+            font-size: 8rem;
+            display: flex;
+            flex-wrap: wrap;
+            opacity: 0.2;
+            color: #228b22;
+        }
+
+        /* 12. SOREN (Página Congelada) */
+        body:has(.card-soren:hover) {
+            filter: hue-rotate(180deg) saturate(0.3) brightness(1.5);
+        }
+        body:has(.card-soren:hover)::after {
+            box-shadow: inset 0 0 200px rgba(176, 224, 230, 0.8);
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(176,224,230,0.2));
+            opacity: 1;
+        }
+
+        /* 13. UROBOROS (Miasma y Peste) */
+        body:has(.card-uroboros:hover) {
+            filter: sepia(0.5) hue-rotate(40deg) contrast(1.2);
+        }
+        body:has(.card-uroboros:hover)::after {
+            background: radial-gradient(circle, transparent, rgba(154, 205, 50, 0.3));
+            filter: blur(5px);
+            opacity: 1;
+            animation: miasma-drift 3s infinite alternate;
+        }
+        @keyframes miasma-drift { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.1); opacity: 1; } }
+
+        /* 14. ZION (Glitch Cibernético) */
+        body:has(.card-zion:hover) {
+            animation: system-glitch 0.2s infinite;
+        }
+        body:has(.card-zion:hover)::before {
+            content: "ANOMALÍA DETECTADA // SOBREESCRITURA DE VACÍO";
+            font-family: monospace;
+            font-size: 3rem;
+            color: #8a2be2;
+            background: black;
+            opacity: 0.4;
+            animation: text-glitch 0.3s infinite;
+        }
+        @keyframes system-glitch {
+            0% { filter: hue-rotate(0deg) contrast(100%); transform: translate(0, 0) skewX(0); }
+            20% { filter: hue-rotate(90deg) contrast(200%); transform: translate(-5px, 5px) skewX(10deg); }
+            40% { filter: hue-rotate(0deg) contrast(100%); transform: translate(5px, -5px) skewX(-10deg); }
+            60% { filter: hue-rotate(180deg) contrast(300%); transform: translate(-2px, 2px) skewX(5deg); }
+            100% { filter: hue-rotate(0deg) contrast(100%); transform: translate(0, 0) skewX(0); }
+        }
+
+    </style>
 </head>
 <body>
 
     <header class="main-header chapter-header">
-        <!-- Botón para volver al Home principal -->
-        <a href="../../index.html" class="btn-back">Ojo de la Verdad (Volver al Registro)</a>
+        <a href="../../../index.html" class="btn-back">Ojo de la Verdad (Volver al Registro)</a>
         <div class="header-content" style="text-align: center; margin-top: 20px;">
             <h1 style="font-size: 2.5rem; text-shadow: 0 0 15px rgba(255, 26, 26, 0.6);">Crónicas del Linaje</h1>
-            <p class="subtitle" style="color: var(--bright-red); letter-spacing: 3px; margin-top: 10px;">Descendencia de Fox</p>
+            <p class="subtitle" style="color: var(--bright-red); letter-spacing: 3px; margin-top: 10px;">Los 14 Fragmentos de Fox Morningstar</p>
         </div>
     </header>
 
     <main class="container" style="margin-top: 40px;">
         
         <div class="grid-container">
-            <!-- Tarjeta para el Primer Hijo -->
-            <div class="story-card">
-                <h4>Primera Descendencia</h4>
-                <p>Las crónicas del primer heredero del poder Otsutsuki y Morningstar.</p>
-                <a href="hijo-1/cap1.html" class="btn-primary">Acceder al Registro</a>
-            </div>
             
-            <!-- Tarjeta para el Segundo Hijo -->
-            <div class="story-card">
-                <h4>Segunda Descendencia</h4>
-                <p>El camino del segundo fragmento del linaje prohibido.</p>
-                <a href="hijo-2/cap1.html" class="btn-primary">Acceder al Registro</a>
+            <!-- 1. Aion -->
+            <div class="story-card card-aion" style="border-color: rgba(192, 192, 192, 0.4);">
+                <h4 style="color: #c0c0c0;">1. Aion Morningstar</h4>
+                <p><strong>El Crono-Soberano.</strong> El relojero de Aethel con control absoluto sobre la línea temporal. Su puntualidad dictamina el destino.</p>
+                <a href="aion/cap1.html" class="btn-primary" style="background-color: #2b2b2b; border: 1px solid #c0c0c0;">Acceder al Registro</a>
             </div>
+
+            <!-- 2. Ale -->
+            <div class="story-card card-ale" style="border-color: rgba(70, 70, 70, 0.5);">
+                <h4 style="color: #8c8c8c;">2. Ale Morningstar</h4>
+                <p><strong>El Rey de la Penumbra.</strong> El comando definitivo del multiverso que desmembra la realidad jugando con el Vacío y las sombras.</p>
+                <a href="ale/cap1.html" class="btn-primary" style="background-color: #1a1a1a; border: 1px solid #4a4a4a;">Acceder al Registro</a>
+            </div>
+
+            <!-- 3. Astherion -->
+            <div class="story-card card-astherion" style="border-color: rgba(0, 153, 255, 0.4);">
+                <h4 style="color: #4da6ff;">3. Astherion Morningstar</h4>
+                <p><strong>El Arquitecto.</strong> El primogénito que diseñó la estructura física de Aethel con plasma, relámpagos y una simetría perfecta.</p>
+                <a href="astherion/cap1.html" class="btn-primary" style="background-color: #003366; border: 1px solid #4da6ff;">Acceder al Registro</a>
+            </div>
+
+            <!-- 4. Auriel -->
+            <div class="story-card card-auriel" style="border-color: rgba(255, 215, 0, 0.4);">
+                <h4 style="color: #ffd700;">4. Auriel Morningstar</h4>
+                <p><strong>La Luz Primordial.</strong> La bondad y compasión absolutas. Disuelve la oscuridad y domina la luz sólida a velocidades estelares.</p>
+                <a href="auriel/cap1.html" class="btn-primary" style="background-color: #b38600; border: 1px solid #ffd700;">Acceder al Registro</a>
+            </div>
+
+            <!-- 5. Cael y Zael -->
+            <div class="story-card card-cael-zael" style="border-color: rgba(255, 69, 0, 0.4);">
+                <h4 style="color: #ff4500;">5. Cael y Zael Morningstar</h4>
+                <p><strong>Los Mellizos del Caos.</strong> La Creación y Destrucción menores. Uno desmantela en cenizas, el otro forja armas en perfecta sintonía.</p>
+                <a href="cael-zael/cap1.html" class="btn-primary" style="background-color: #8b0000; border: 1px solid #ff4500;">Acceder al Registro</a>
+            </div>
+
+            <!-- 6. Damian -->
+            <div class="story-card card-damian" style="border-color: rgba(255, 26, 26, 0.2);">
+                <h4 style="color: var(--bright-red);">6. Damian Morningstar</h4>
+                <p><strong>El Maestro de la Ilusión.</strong> Su mente es un laberinto donde la realidad se dobla. Juega con tus sentidos hasta quebrar tu cordura.</p>
+                <a href="damian/cap1.html" class="btn-secondary">Acceder al Registro</a>
+            </div>
+
+            <!-- 7. Jack -->
+            <div class="story-card card-jack" style="border-color: rgba(102, 0, 102, 0.4);">
+                <h4 style="color: #cc00cc;">7. Jack Morningstar</h4>
+                <p><strong>El Maestro del Terror.</strong> Hackea mentes a través del miedo primordial, con bestias de múltiples ojos bajo su dominio.</p>
+                <a href="jack/cap1.html" class="btn-primary" style="background-color: #330033; border: 1px solid #cc00cc;">Acceder al Registro</a>
+            </div>
+
+            <!-- 8. Kairon -->
+            <div class="story-card card-kairon" style="border-color: rgba(218, 165, 32, 0.4);">
+                <h4 style="color: #daa520;">8. Kairon Morningstar</h4>
+                <p><strong>El Lord Temporal.</strong> Cúpulas temporales y bucles infinitos. Una mente veterana con paciencia aristocrática.</p>
+                <a href="kairon/cap1.html" class="btn-primary" style="background-color: #554000; border: 1px solid #daa520;">Acceder al Registro</a>
+            </div>
+
+            <!-- 9. Luka -->
+            <div class="story-card card-luka" style="border-color: rgba(255, 26, 26, 0.2);">
+                <h4 style="color: var(--bright-red);">9. Luka Morningstar</h4>
+                <p><strong>El Pozo de Oscuridad.</strong> Cuando camina, la luz muere. Una presencia invasiva que absorbe toda esperanza del entorno.</p>
+                <a href="luka/cap1.html" class="btn-secondary">Acceder al Registro</a>
+            </div>
+
+            <!-- 10. Raden -->
+            <div class="story-card card-raden" style="border-color: rgba(0, 255, 0, 0.4);">
+                <h4 style="color: #00ff00;">10. Raden Morningstar</h4>
+                <p><strong>El Núcleo Inestable.</strong> Irradia un brillo radiactivo capaz de derretir las mismísimas barreras dimensionales.</p>
+                <a href="raden/cap1.html" class="btn-primary" style="background-color: #004d00; border: 1px solid #00ff00;">Acceder al Registro</a>
+            </div>
+
+            <!-- 11. Samuel -->
+            <div class="story-card card-samuel" style="border-color: rgba(34, 139, 34, 0.4);">
+                <h4 style="color: #228b22;">11. Samuel Morningstar</h4>
+                <p><strong>El Guardián de la Vida.</strong> Domina el código fuente de la biología, cultivando un jardín de flora mortífera y con dientes.</p>
+                <a href="samuel/cap1.html" class="btn-primary" style="background-color: #003300; border: 1px solid #228b22;">Acceder al Registro</a>
+            </div>
+
+            <!-- 12. Soren -->
+            <div class="story-card card-soren" style="border-color: rgba(176, 224, 230, 0.4);">
+                <h4 style="color: #b0e0e6;">12. Soren Morningstar</h4>
+                <p><strong>El Cero Absoluto.</strong> Envuelto en una escarcha negra perpetua que congela y aísla todo lo que cruza su rango.</p>
+                <a href="soren/cap1.html" class="btn-primary" style="background-color: #002b36; border: 1px solid #b0e0e6;">Acceder al Registro</a>
+            </div>
+
+            <!-- 13. Uroboros -->
+            <div class="story-card card-uroboros" style="border-color: rgba(154, 205, 50, 0.4);">
+                <h4 style="color: #9acd32;">13. Uroboros Morningstar</h4>
+                <p><strong>El Heraldo de la Plaga.</strong> Dios del miasma. Oculto tras su Máscara, su toque necrotiza la existencia.</p>
+                <a href="uroboros/cap1.html" class="btn-primary" style="background-color: #334d00; border: 1px solid #9acd32;">Acceder al Registro</a>
+            </div>
+
+            <!-- 14. Zion -->
+            <div class="story-card card-zion" style="border-color: rgba(138, 43, 226, 0.4);">
+                <h4 style="color: #8a2be2;">14. Zion Morningstar</h4>
+                <p><strong>El Tecno-Hereje.</strong> El Anomalía. Sus glitches de código de Vacío purifican y sobreescriben cualquier sistema.</p>
+                <a href="zion/cap1.html" class="btn-primary" style="background-color: #2d004d; border: 1px solid #8a2be2;">Acceder al Registro</a>
+            </div>
+
         </div>
 
     </main>
