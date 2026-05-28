@@ -6,6 +6,109 @@
     <title>Biblioteca Prohibida | Registro Akashico</title>
     <!-- Volvemos dos niveles para llegar a la raíz y entrar a css -->
     <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- MAGIA CSS: EFECTOS GLOBALES PARA LOS EXPEDIENTES -->
+    <style>
+        body {
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* EXPEDIENTE: FOX */
+        body:has(.card-fox:hover) { background: radial-gradient(circle, #ffffff 10%, #000000 90%); color: #fff; }
+        body:has(.card-fox:hover)::before { content: "S O B E R A N O  D E  A E T H E L"; font-size: 4rem; color: transparent; -webkit-text-stroke: 2px var(--bright-red); opacity: 0.3; letter-spacing: 30px; text-shadow: 0 0 20px rgba(255, 0, 0, 0.5); }
+
+        /* EXPEDIENTE: AION */
+        body:has(.card-aion:hover) { filter: grayscale(100%) contrast(120%); }
+        body:has(.card-aion:hover)::before { content: "⏳ REGRESIÓN BIOLÓGICA ACTIVADA ⏳"; font-family: monospace; font-size: 2rem; color: white; top: 20px; bottom: auto; opacity: 0.8; letter-spacing: 5px; }
+        body:has(.card-aion:hover) .grid-container { animation: time-reverse 0.1s infinite alternate; }
+        @keyframes time-reverse { 0% { transform: translateX(-2px); } 100% { transform: translateX(2px); } }
+
+        /* EXPEDIENTE: ALE */
+        body:has(.card-ale:hover) { background-color: #000; }
+        body:has(.card-ale:hover) main > *:not(.grid-container) { opacity: 0.1; }
+        body:has(.card-ale:hover)::before { background: radial-gradient(circle at 50% 50%, transparent 10%, rgba(0,0,0,0.95) 80%); opacity: 1; }
+
+        /* EXPEDIENTE: ASTHERION */
+        body:has(.card-astherion:hover)::before { content: "⚡ PROTOCOLO ARQUITECTO ⚡"; font-size: 4rem; color: #4da6ff; opacity: 0.15; animation: text-glitch 0.1s infinite; }
+
+        /* EXPEDIENTE: AURIEL */
+        body:has(.card-auriel:hover) { background-color: #ffffff; color: #000 !important; filter: brightness(1.2) contrast(1.1); }
+        body:has(.card-auriel:hover) * { box-shadow: none !important; text-shadow: 0 0 10px rgba(255, 215, 0, 0.8) !important; border-color: gold !important; color: #111; }
+
+        /* EXPEDIENTE: CAEL Y ZAEL */
+        @keyframes destroy-rebuild { 0% { filter: blur(0) grayscale(0); opacity: 1; transform: scale(1); } 40% { filter: blur(8px) grayscale(100%); opacity: 0.4; transform: scale(0.98) skewX(2deg); } 60% { filter: blur(5px) sepia(1) hue-rotate(-50deg) saturate(5); opacity: 0.6; transform: scale(1.02); } 100% { filter: blur(0) grayscale(0); opacity: 1; transform: scale(1); } }
+        body:has(.card-cael-zael:hover) main { animation: destroy-rebuild 2s infinite; }
+
+        /* EXPEDIENTE: DAMIAN */
+        body:has(.card-damian:hover) { background: linear-gradient(90deg, #002395 33%, #ffffff 33%, #ffffff 66%, #ed2939 66%); animation: warp-perspective 3s infinite alternate; }
+        @keyframes warp-perspective { 0% { transform: perspective(500px) rotateX(5deg); } 100% { transform: perspective(500px) rotateX(-5deg); } }
+
+        /* EXPEDIENTE: JACK */
+        body:has(.card-jack:hover) { background-color: #0a0000; filter: contrast(150%) saturate(150%); }
+        body:has(.card-jack:hover) * { color: #8b0000 !important; font-family: 'Courier New', Courier, monospace !important; }
+        body:has(.card-jack:hover)::before { content: "👁️ ALERTA BIOLÓGICA 👁️"; font-size: 6rem; color: red; opacity: 0.15; animation: jumpscare 0.4s infinite; }
+        @keyframes jumpscare { 0%, 90% { opacity: 0; transform: scale(1); } 95% { opacity: 0.8; transform: scale(1.5); } 100% { opacity: 0; } }
+
+        /* EXPEDIENTE: KAIRÓS */
+        body:has(.card-kairos:hover) { filter: sepia(0.8) hue-rotate(-10deg); }
+        body:has(.card-kairos:hover)::after { background: repeating-radial-gradient(circle, transparent, transparent 20px, rgba(218, 165, 32, 0.1) 21px, rgba(218, 165, 32, 0.1) 22px); opacity: 1; animation: clock-spin 10s linear infinite; }
+        @keyframes clock-spin { 100% { transform: rotate(360deg); } }
+
+        /* EXPEDIENTE: LUKA */
+        body:has(.card-luka:hover) { background-color: black; }
+        body:has(.card-luka:hover) main, body:has(.card-luka:hover) header { opacity: 0.05; }
+        body:has(.card-luka:hover) .card-luka { opacity: 1 !important; box-shadow: 0 0 50px rgba(255,255,255,0.8); z-index: 1000; position: relative; }
+
+        /* EXPEDIENTE: RADEN */
+        body:has(.card-raden:hover) { filter: sepia(1) hue-rotate(70deg) saturate(4) brightness(0.9); }
+        body:has(.card-raden:hover)::after { box-shadow: inset 0 0 150px #00ff00; opacity: 0.6; animation: geiger-pulse 0.2s infinite; }
+        @keyframes geiger-pulse { 0% { opacity: 0.5; } 100% { opacity: 0.7; } }
+
+        /* EXPEDIENTE: SAMUEL */
+        body:has(.card-samuel:hover) { background-color: #051a05; }
+        body:has(.card-samuel:hover)::before { content: "🌿 🥀 🌱 🌿 🥀 🌱"; font-size: 8rem; display: flex; flex-wrap: wrap; opacity: 0.2; color: #228b22; }
+
+        /* EXPEDIENTE: SOREN */
+        body:has(.card-soren:hover) { filter: hue-rotate(180deg) saturate(0.3) brightness(1.5); }
+        body:has(.card-soren:hover)::after { box-shadow: inset 0 0 200px rgba(176, 224, 230, 0.8); background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(176,224,230,0.2)); opacity: 1; }
+
+        /* EXPEDIENTE: UROBOROS */
+        body:has(.card-uroboros:hover) { filter: sepia(0.5) hue-rotate(40deg) contrast(1.2); }
+        body:has(.card-uroboros:hover)::after { background: radial-gradient(circle, transparent, rgba(154, 205, 50, 0.3)); filter: blur(5px); opacity: 1; animation: miasma-drift 3s infinite alternate; }
+        @keyframes miasma-drift { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.1); opacity: 1; } }
+
+        /* EXPEDIENTE: ZION */
+        body:has(.card-zion:hover) { animation: system-glitch 0.2s infinite; }
+        body:has(.card-zion:hover)::before { content: "DATOS CORRUPTOS // SOBREESCRITURA INICIADA"; font-family: monospace; font-size: 3rem; color: #8a2be2; background: black; opacity: 0.5; animation: text-glitch 0.3s infinite; }
+        @keyframes system-glitch { 0% { filter: hue-rotate(0deg) contrast(100%); transform: translate(0, 0); } 20% { filter: hue-rotate(90deg) contrast(200%); transform: translate(-3px, 3px); } 40% { filter: hue-rotate(0deg) contrast(100%); transform: translate(3px, -3px); } 60% { filter: hue-rotate(180deg) contrast(300%); transform: translate(-2px, 2px); } 100% { filter: hue-rotate(0deg) contrast(100%); transform: translate(0, 0); } }
+        @keyframes text-glitch { 0% { opacity: 1; transform: skewX(0); } 50% { opacity: 0.8; transform: skewX(5deg); } 100% { opacity: 1; transform: skewX(0); } }
+
+        /* Estilo general para las tarjetas de archivo */
+        .archive-card {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 10, 10, 0.8);
+        }
+        .archive-card h4 {
+            font-family: 'Courier New', Courier, monospace;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -13,26 +116,119 @@
         <a href="../index.html" class="btn-back">Ojo de la Verdad (Volver al Registro)</a>
         <div class="header-content" style="text-align: center; margin-top: 20px;">
             <h1 style="font-size: 2.5rem; text-shadow: 0 0 15px rgba(255, 26, 26, 0.6);">Biblioteca Prohibida</h1>
-            <p class="subtitle" style="color: var(--bright-red); letter-spacing: 3px; margin-top: 10px;">Expedientes y Datos Técnicos</p>
+            <p class="subtitle" style="color: var(--bright-red); letter-spacing: 3px; margin-top: 10px;">Expedientes y Datos Técnicos Desclasificados</p>
         </div>
     </header>
 
     <main class="container" style="margin-top: 40px;">
         
         <div class="grid-container">
-            <!-- Ficha de Fox -->
-            <div class="story-card archive-card">
-                <h4>Expediente: Fox Otsutsuki</h4>
-                <p>Niveles de poder, habilidades del Yin-Yang Sharingan y origen detallado.</p>
-                <a href="fox.html" class="btn-archive">Ver Expediente</a>
-            </div>
             
-            <!-- Ficha del Primer Hijo -->
-            <div class="story-card archive-card">
-                <h4>Expediente: Primer Heredero</h4>
-                <p>Análisis de capacidades físicas y herencia del Juubi.</p>
-                <a href="hijo1.html" class="btn-archive">Ver Expediente</a>
+            <!-- Ficha de Fox -->
+            <div class="story-card archive-card card-fox">
+                <h4 style="color: var(--bright-red);">[V0] Fox Otsutsuki</h4>
+                <p><strong>El Soberano de Aethel.</strong> Archivo maestro clasificado sobre herencia del Juubi y dominio absoluto dual entre la Oscuridad Absoluta y Luz Divina.</p>
+                <a href="fox.html" class="btn-archive" style="border-color: var(--bright-red);">Leer Documento</a>
             </div>
+
+            <!-- Ficha de Aion -->
+            <div class="story-card archive-card card-aion">
+                <h4 style="color: #c0c0c0;">[V1] Aion Morningstar</h4>
+                <p><strong>El Crono-Soberano.</strong> Análisis de la Cronokinesis Objetual para manipular la línea temporal individual de la materia y ejecución del Bucle de Castigo.</p>
+                <a href="aion.html" class="btn-archive" style="border-color: #c0c0c0; color: #c0c0c0;">Leer Documento</a>
+            </div>
+
+            <!-- Ficha de Ale -->
+            <div class="story-card archive-card card-ale">
+                <h4 style="color: #8c8c8c;">[V1] Ale Morningstar</h4>
+                <p><strong>El Rey de la Penumbra.</strong> A sus 5 años, actúa como el contrapeso biológico y cósmico de su gemelo, operando mediante entidades de las sombras.</p>
+                <a href="ale.html" class="btn-archive" style="border-color: #4a4a4a; color: #8c8c8c;">Leer Documento</a>
+            </div>
+
+            <!-- Ficha de Astherion -->
+            <div class="story-card archive-card card-astherion">
+                <h4 style="color: #4da6ff;">[V1] Astherion Morningstar</h4>
+                <p><strong>El Arquitecto.</strong> Expediente del primogénito de 18 años, estructurador de Aethel que controla plasma y proyecta chispas de relámpagos blancos sobre su impecable traje.</p>
+                <a href="astherion.html" class="btn-archive" style="border-color: #4da6ff; color: #4da6ff;">Leer Documento</a>
+            </div>
+
+            <!-- Ficha de Auriel -->
+            <div class="story-card archive-card card-auriel">
+                <h4 style="color: #ffd700;">[V2] Auriel Morningstar</h4>
+                <p><strong>La Luz Primordial.</strong> A sus 5 años, emana una Radiación de Paz. Documentación técnica sobre la Traslación Fotónica a velocidad lumínica y el Castigo Inmaculado.</p>
+                <a href="auriel.html" class="btn-archive" style="border-color: #ffd700; color: #ffd700;">Leer Documento</a>
+            </div>
+
+            <!-- Ficha de Cael y Zael -->
+            <div class="story-card archive-card card-cael-zael">
+                <h4 style="color: #ff4500;">[V1] Cael y Zael Morningstar</h4>
+                <p><strong>Los Mellizos del Caos (11 años).</strong> Sinergia combativa mediante las katanas Lucero Vespertino y Lucero del Alba. Zael aplica Entropía Acelerada y Cael emplea la Reescritura de la Materia Inerte.</p>
+                <a href="cael-zael.html" class="btn-archive" style="border-color: #ff4500; color: #ff4500;">Leer Documento</a>
+            </div>
+
+            <!-- Ficha de Damian -->
+            <div class="story-card archive-card card-damian">
+                <h4 style="color: var(--bright-red);">[CLASIFICADO] Damian Morningstar</h4>
+                <p><strong>El Maestro de la Ilusión.</strong> Perfil restringido. Parámetros de distorsión sensorial en evaluación por la mente colmena.</p>
+                <a href="damian.html" class="btn-archive">Leer Documento</a>
+            </div>
+
+            <!-- Ficha de Jack -->
+            <div class="story-card archive-card card-jack">
+                <h4 style="color: #cc00cc;">[V1] Jack Morningstar</h4>
+                <p><strong>El Maestro del Terror.</strong> Parámetros biológicos de las entidades con múltiples ojos y brazos extendidos que oculta bajo su cama para infundir temor.</p>
+                <a href="jack.html" class="btn-archive" style="border-color: #cc00cc; color: #cc00cc;">Leer Documento</a>
+            </div>
+
+            <!-- Ficha de Kairon -->
+            <div class="story-card archive-card card-kairon">
+                <h4 style="color: #daa520;">[V1] Kairón Morningstar</h4>
+                <p><strong>Lord Temporal (28 años).</strong> Procedimientos técnicos del uso de su reloj de bolsillo destartalado para tejer cúpulas temporales mediante hilos dorados.</p>
+                <a href="kairon.html" class="btn-archive" style="border-color: #daa520; color: #daa520;">Leer Documento</a>
+            </div>
+
+            <!-- Ficha de Luka -->
+            <div class="story-card archive-card card-luka">
+                <h4 style="color: var(--bright-red);">[CLASIFICADO] Luka Morningstar</h4>
+                <p><strong>El Pozo de Oscuridad.</strong> Datos encriptados debido a una absorción lumínica anómala. Pendiente de resolución akashica.</p>
+                <a href="luka.html" class="btn-archive">Leer Documento</a>
+            </div>
+
+            <!-- Ficha de Raden -->
+            <div class="story-card archive-card card-raden">
+                <h4 style="color: #00ff00;">[V1] Raden Morningstar</h4>
+                <p><strong>El Núcleo Inestable (14 años).</strong> Nivel de exposición crítica. Capaz de derretir el suelo virtual emanando un potente brillo verde radiactivo.</p>
+                <a href="raden.html" class="btn-archive" style="border-color: #00ff00; color: #00ff00;">Leer Documento</a>
+            </div>
+
+            <!-- Ficha de Samuel -->
+            <div class="story-card archive-card card-samuel">
+                <h4 style="color: #228b22;">[V1] Samuel Morningstar</h4>
+                <p><strong>El Guardián de la Vida.</strong> Parámetros botánicos sobre el cultivo de flora mortífera y plantas con dientes que atacan bajo provocación.</p>
+                <a href="samuel.html" class="btn-archive" style="border-color: #228b22; color: #228b22;">Leer Documento</a>
+            </div>
+
+            <!-- Ficha de Soren -->
+            <div class="story-card archive-card card-soren">
+                <h4 style="color: #b0e0e6;">[V1] Soren Morningstar</h4>
+                <p><strong>El Cero Absoluto (9 años).</strong> Termodinámica inversa clasificada. Capaz de congelar el entorno con una escarcha negra detectada a un milímetro de su piel.</p>
+                <a href="soren.html" class="btn-archive" style="border-color: #b0e0e6; color: #b0e0e6;">Leer Documento</a>
+            </div>
+
+            <!-- Ficha de Uroboros -->
+            <div class="story-card archive-card card-uroboros">
+                <h4 style="color: #9acd32;">[V1] Uroboros Morningstar</h4>
+                <p><strong>El Heraldo de la Plaga (14 años).</strong> Aislamiento de la Prima Mácula mediante la Máscara del Paciente Cero y aplicación táctica del Toque de la Ruina.</p>
+                <a href="uroboros.html" class="btn-archive" style="border-color: #9acd32; color: #9acd32;">Leer Documento</a>
+            </div>
+
+            <!-- Ficha de Zion -->
+            <div class="story-card archive-card card-zion">
+                <h4 style="color: #8a2be2;">[V2] Zion Morningstar</h4>
+                <p><strong>El Tecno-Hereje (15 años).</strong> Proyección de glitches púrpuras holográficos debido a la interferencia del código fuente y canalización de la Sobreescritura del Vacío.</p>
+                <a href="zion.html" class="btn-archive" style="border-color: #8a2be2; color: #8a2be2;">Leer Documento</a>
+            </div>
+
         </div>
 
     </main>
