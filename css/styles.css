@@ -1,3 +1,4 @@
+/* --- VARIABLES GLOBALES --- */
 :root {
     --bg-dark: #050505;
     --bg-card: #121212;
@@ -7,6 +8,7 @@
     --bright-red: #ff1a1a;
 }
 
+/* --- RESET Y ESTILOS BASE --- */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -27,7 +29,7 @@ body {
     padding: 20px;
 }
 
-/* Encabezado */
+/* --- ENCABEZADOS --- */
 .main-header {
     background: linear-gradient(180deg, rgba(139,0,0,0.15) 0%, rgba(5,5,5,0) 100%);
     border-bottom: 1px solid rgba(139,0,0,0.3);
@@ -52,7 +54,7 @@ body {
     margin-top: 10px;
 }
 
-/* Tarjeta Principal (Fox) */
+/* --- SECCIONES DEL HOME (TARJETAS Y GRILLA) --- */
 .main-series {
     margin-bottom: 40px;
 }
@@ -88,7 +90,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Grilla de Series de los Hijos */
 .lineage-section {
     margin-bottom: 40px;
 }
@@ -134,8 +135,8 @@ body {
     margin-bottom: 20px;
 }
 
-/* Botones y Enlaces */
-.btn-primary, .btn-secondary, .btn-archive {
+/* --- BOTONES --- */
+.btn-primary, .btn-secondary, .btn-archive, .btn-back {
     display: inline-block;
     text-decoration: none;
     padding: 10px 20px;
@@ -169,7 +170,20 @@ body {
     box-shadow: 0 0 10px rgba(139,0,0,0.3);
 }
 
-/* Caja de Fichas de Personajes */
+.btn-back {
+    margin-bottom: 20px;
+    border: 1px solid var(--primary-red);
+    padding: 8px 15px;
+    color: var(--bright-red);
+}
+
+.btn-back:hover {
+    background: var(--primary-red);
+    color: var(--text-main);
+    box-shadow: 0 0 10px rgba(255, 26, 26, 0.4);
+}
+
+/* --- BIBLIOTECA / ARCHIVOS --- */
 .archive-section {
     margin-bottom: 40px;
 }
@@ -204,46 +218,7 @@ body {
     box-shadow: 0 0 15px rgba(255, 26, 26, 0.4);
 }
 
-/* Pie de Página */
-.main-footer {
-    border-top: 1px solid rgba(255, 26, 26, 0.1);
-    text-align: center;
-    padding: 30px 20px;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-top: 60px;
-}
-
-/* Ajuste Responsivo (Celulares) */
-@media (max-width: 768px) {
-    .grid-container {
-        grid-template-columns: 1fr;
-    }
-    .main-header h1 {
-        font-size: 2rem;
-    }
-}
-/* --- NUEVOS ESTILOS PARA LECTURA Y FICHAS --- */
-.btn-back {
-    display: inline-block;
-    color: var(--bright-red);
-    text-decoration: none;
-    font-weight: bold;
-    margin-bottom: 20px;
-    border: 1px solid var(--primary-red);
-    padding: 8px 15px;
-    border-radius: 4px;
-    transition: 0.3s;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-}
-
-.btn-back:hover {
-    background: var(--primary-red);
-    color: var(--text-main);
-    box-shadow: 0 0 10px rgba(255, 26, 26, 0.4);
-}
-
+/* --- ESTILOS DE LECTURA (CAPÍTULOS) --- */
 .chapter-header {
     padding: 30px 20px;
     text-align: left;
@@ -254,7 +229,7 @@ body {
 }
 
 .reading-container {
-    max-width: 750px; /* Más angosto para leer cómodo como en Webtoon */
+    max-width: 750px;
     font-size: 1.1rem;
 }
 
@@ -272,7 +247,7 @@ body {
     border-top: 1px solid rgba(255, 26, 26, 0.2);
 }
 
-/* Estilos de la Ficha (Expediente) */
+/* --- ESTILOS DE FICHA DE PERSONAJE --- */
 .character-file {
     text-align: left;
     border-color: var(--bright-red);
@@ -311,4 +286,24 @@ body {
     margin-bottom: 15px;
     text-transform: uppercase;
     font-family: 'Georgia', serif;
+}
+
+/* --- PIE DE PÁGINA --- */
+.main-footer {
+    border-top: 1px solid rgba(255, 26, 26, 0.1);
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 60px;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+    .main-header h1 {
+        font-size: 2rem;
+    }
 }

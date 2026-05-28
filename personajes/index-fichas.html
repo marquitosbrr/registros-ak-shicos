@@ -3,35 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expediente: Fox - Registro Akashico</title>
+    <title>Biblioteca Prohibida | Registro Akashico</title>
+    <!-- Volvemos dos niveles para llegar a la raíz y entrar a css -->
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
 
     <header class="main-header chapter-header">
         <a href="../index.html" class="btn-back">Ojo de la Verdad (Volver al Registro)</a>
-        <div class="header-content">
-            <h1>Expediente Clasificado</h1>
-            <p class="subtitle">Nivel de Acceso: Máximo</p>
+        <div class="header-content" style="text-align: center; margin-top: 20px;">
+            <h1 style="font-size: 2.5rem; text-shadow: 0 0 15px rgba(255, 26, 26, 0.6);">Biblioteca Prohibida</h1>
+            <p class="subtitle" style="color: var(--bright-red); letter-spacing: 3px; margin-top: 10px;">Expedientes y Datos Técnicos</p>
         </div>
     </header>
 
-    <main class="container">
-        <div class="archive-box character-file">
-            <h2 class="character-name">Fox Otsutsuki Morningstar</h2>
-            
-            <div class="character-details">
-                <p><strong>Origen:</strong> Descendiente directo del Juubi.</p>
-                <p><strong>Naturaleza:</strong> Personificación de la Muerte.</p>
-                <p><strong>Estado:</strong> Activo.</p>
-                <p><strong>Afiliación:</strong> Linaje Morningstar.</p>
+    <main class="container" style="margin-top: 40px;">
+        
+        <div class="grid-container">
+            <!-- Ficha de Fox -->
+            <div class="story-card archive-card">
+                <h4>Expediente: Fox Otsutsuki</h4>
+                <p>Niveles de poder, habilidades del Yin-Yang Sharingan y origen detallado.</p>
+                <a href="fox.html" class="btn-archive">Ver Expediente</a>
             </div>
-
-            <div class="character-lore">
-                <h3>Registro Histórico</h3>
-                <p>Una entidad que trasciende la comprensión humana, marcando el equilibrio entre la creación y la destrucción absoluta. Los registros akashicos indican que su presencia altera el plano físico, manifestándose como el fin ineludible.</p>
+            
+            <!-- Ficha del Primer Hijo -->
+            <div class="story-card archive-card">
+                <h4>Expediente: Primer Heredero</h4>
+                <p>Análisis de capacidades físicas y herencia del Juubi.</p>
+                <a href="hijo1.html" class="btn-archive">Ver Expediente</a>
             </div>
         </div>
+
     </main>
 
     <footer class="main-footer">
