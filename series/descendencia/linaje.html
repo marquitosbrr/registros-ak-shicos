@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Linaje - Registro Akashico</title>
-    <link rel="stylesheet" href="../../../css/styles.css">
+    <!-- CORRECCIÓN: Dos niveles hacia atrás para llegar a la raíz desde series/descendencia/ -->
+    <link rel="stylesheet" href="../../css/styles.css">
     
     <!-- MAGIA CSS: EFECTOS GLOBALES EN LA PÁGINA SEGÚN EL HIJO -->
     <style>
@@ -75,7 +76,7 @@
             filter: brightness(1.2) contrast(1.1);
         }
         body:has(.card-auriel:hover) * {
-            box-shadow: none !important; /* Disuelve las sombras */
+            box-shadow: none !important;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.8) !important;
             border-color: gold !important;
             color: #111;
@@ -84,8 +85,8 @@
         /* 5. CAEL Y ZAEL (Destrucción y Reconstrucción) */
         @keyframes destroy-rebuild { 
             0% { filter: blur(0) grayscale(0); opacity: 1; transform: scale(1); } 
-            40% { filter: blur(10px) grayscale(100%); opacity: 0.3; transform: scale(0.95) skewX(5deg); } /* Desmantela en cenizas */
-            60% { filter: blur(10px) sepia(1) hue-rotate(-50deg) saturate(5); opacity: 0.5; transform: scale(1.05); } /* Forja al rojo vivo */
+            40% { filter: blur(10px) grayscale(100%); opacity: 0.3; transform: scale(0.95) skewX(5deg); } 
+            60% { filter: blur(10px) sepia(1) hue-rotate(-50deg) saturate(5); opacity: 0.5; transform: scale(1.05); } 
             100% { filter: blur(0) grayscale(0); opacity: 1; transform: scale(1); } 
         }
         body:has(.card-cael-zael:hover) main {
@@ -144,7 +145,7 @@
             background-color: black;
         }
         body:has(.card-luka:hover) main, body:has(.card-luka:hover) header {
-            opacity: 0.02; /* Apaga casi toda la página */
+            opacity: 0.02; 
         }
         body:has(.card-luka:hover) .card-luka {
             opacity: 1 !important;
@@ -225,7 +226,7 @@
 <body>
 
     <header class="main-header chapter-header">
-        <a href="../../../index.html" class="btn-back">Ojo de la Verdad (Volver al Registro)</a>
+        <a href="../../index.html" class="btn-back">Ojo de la Verdad (Volver al Registro)</a>
         <div class="header-content" style="text-align: center; margin-top: 20px;">
             <h1 style="font-size: 2.5rem; text-shadow: 0 0 15px rgba(255, 26, 26, 0.6);">Crónicas del Linaje</h1>
             <p class="subtitle" style="color: var(--bright-red); letter-spacing: 3px; margin-top: 10px;">Los 14 Fragmentos de Fox Morningstar</p>
